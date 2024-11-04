@@ -11,9 +11,9 @@ Route::get('/', function () {
 //     return view('home');
 // });
 
-route::redirect('/home', '/');
+// route::redirect('/home', '/');
 
-// Route::view('/home', 'home');
+Route::view('/home', 'home');
 
 // Route::get('/about/{name}', function ($name) {
 //     // echo $name;
@@ -22,7 +22,8 @@ route::redirect('/home', '/');
 
 
 Route::get('user', [UserController::class, 'getUser']);
-Route::get('about/{name}', [UserController::class, 'aboutUser']);
+Route::get('about', [UserController::class, 'about']);
+Route::get('about-user/{name}', [UserController::class, 'aboutUser']);
 Route::get('user/{name}', [UserController::class, 'getUserName']);
 Route::get('admin-login', [UserController::class, 'adminLogIn']);
 Route::get('admin-signup', [UserController::class, 'adminSignUp']);

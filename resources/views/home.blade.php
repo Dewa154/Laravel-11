@@ -1,3 +1,6 @@
+@include('common.header')
+
 <h1>Home Page</h1>
-<a href="/">welcome page</a>
-<a href="/about/anil">About Page</a>
+
+@include('common.inner', ['page' => "This is Home page"]);
+
