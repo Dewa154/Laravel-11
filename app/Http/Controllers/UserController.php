@@ -52,9 +52,19 @@ class UserController extends Controller
     }
 
     function addUser(Request $request){
-       echo "Username is $request->username <br>";
-       echo "User Email is $request->email <br>";
-       echo "User City is $request->city <br>";
+      
+      $request->validate([
+        'username' => 'required | min: 3 | max: 15',
+        'email' => 'required | email',
+        'city' =>'required | max:20',
+        'skills' =>'required',
+      ], [
+        'username.required' => 'Username can not be empty',
+        'username.min' => 'Username min characters should be 3',
+        'email.email' => 'This email is not valid',
+      ]);
+
+      return $request;
     }
 
     function addUser2(Request $request){
