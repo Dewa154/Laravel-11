@@ -51,5 +51,18 @@ class UserController extends Controller
       return view('userhome', ["user" => $name, "users" => $users]);
     }
 
-   
+    function addUser(Request $request){
+       echo "Username is $request->username <br>";
+       echo "User Email is $request->email <br>";
+       echo "User City is $request->city <br>";
+    }
+
+    function addUser2(Request $request){
+      // return $request;
+      print_r ($request->skill);
+      echo "<br> $request->gender ";
+      echo "<br> $request->city ";
+      echo "<br> $request->age ";
+    }
 }
+
