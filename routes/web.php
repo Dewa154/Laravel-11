@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\StudentController2;
 use App\Http\Controllers\UploadController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PdfController;
 use App\Http\Middleware\AgeCheck;
 use App\Http\Middleware\CountryCheck;
@@ -130,4 +132,61 @@ Route::post('upload', [UploadController::class, 'upload']);
 Route::view('pdfupload', 'pdfUpload');
 Route::post('showPdf', [PdfController::class, 'pdfUpload']);
 
+// Localization 
+Route::view('welcome2', 'welcome2');
+Route::view('about2', 'about2');
 
+Route::get('welcome2/{lang}', function($lang){
+    App::setLocale($lang);
+    return view('welcome2');
+});
+
+
+//Localization Part-2
+Route::middleware('SetLang')->group(function(){
+    Route::get('/', function(){
+        return view('welcome');
+    });
+
+    Route::view('welcome2', 'welcome2');
+    Route::view('about2', 'about2');
+
+    Route::get('setlang/{lang}', function($lang){
+        Session::put('lang', $lang);
+        return redirect()->back();
+    });
+    
+});
+
+
+Route::view('add', 'add-student2');
+Route::post('added', [StudentController2::class, 'addStudent2']);
+
+Route::get('student2-list', [StudentController2::class, 'listStudent2']);
+
+Route::get('delete/{id}', [StudentController2::class, 'deleteStudent2']);
+
+Route::get('edit/{id}', [StudentController2::class, 'editStudent2']);
+Route::put('update-student2/{id}', [StudentController2::class, 'updateStudent2']);
+
+Route::get('search-student2', [StudentController2::class, 'searchStudent2']);
+
+Route::post('delete-multi', [StudentController2::class, 'deleteMultiple']);
+
+
+Route::view('imageupload', 'imageUpload');
+
+Route::post('uploadedimage', [ImageController::class, 'uploadedImage']);
+
+Route::get('imagelist', [ImageController::class, 'imageList']);
+
+
+Route::view('about3', 'about3');
+Route::view('home3', 'home3');
+
+Route::view('login3', 'login3');
+
+Route::view('admin', 'admin');
+
+Route::view('login4', 'login4');
+Route::view('home4', 'home4');
