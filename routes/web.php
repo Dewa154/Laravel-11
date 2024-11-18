@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
+
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StudentController;
@@ -8,8 +10,16 @@ use App\Http\Controllers\StudentController2;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PdfController;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\SellerController;
+use App\Http\Controllers\MailController;
+use App\Http\Controllers\DeviceController;
+
 use App\Http\Middleware\AgeCheck;
 use App\Http\Middleware\CountryCheck;
+use App\Http\Middleware\CheckEmailSubmission;
+
+
 
 
 // Route::get('/', function () {
@@ -190,3 +200,32 @@ Route::view('admin', 'admin');
 
 Route::view('login4', 'login4');
 Route::view('home4', 'home4');
+
+Route::get('list', [MemberController::class, 'list']);
+Route::get('save', [MemberController::class, 'save']);
+
+
+Route::get('secondlist', [SellerController::class, 'secondList']);
+
+Route::get('many-rel', [SellerController::class, 'manyRel']);
+
+Route::get('many-to-one', [SellerController::class, 'manyToOne']);
+
+Route::post('send-email', [MailController::class, 'sendEmail']);
+Route::view('send-email', 'Email.send-email');
+
+
+// Fluent String.
+// $info = "hi, let's learn Laravel";
+// $info = Str::ucfirst($info);
+// $info = Str::replaceFirst("Hi", "Hello", $info);
+// $info = Str::camel($info);
+
+// $info = Str::of($info)
+// ->ucfirst($info)
+// ->replaceFirst("Hi", "Hello", $info)
+// ->camel($info);
+// echo $info;
+
+
+Route::get('device/{key:name}', [DeviceController::class, 'index']);
